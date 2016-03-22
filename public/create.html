@@ -1,0 +1,114 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="user-scalable=no, width=500" />
+<title>Color Hunt</title><link rel="icon" href="img/favicon.gif" type="image/x-icon">
+<meta property="og:title" content="Color Hunt" />
+<meta name="twitter:title" content="Color Hunt" />
+<meta property="og:image" content="http://colorhunt.co/img/og.png" />
+<meta name="twitter:image" content="http://colorhunt.co/img/og.png" />
+<meta property="og:description" content="Curated collection of beautiful colors, updated daily." />
+<meta name="description" content="Curated collection of beautiful colors, updated daily.">
+<meta name="twitter:card" content="photo" />
+<meta name="twitter:site" content="@colorhunters" />
+<meta name="twitter:url" content="http://www.colorhunt.co" />
+<meta property="og:url" content="http://www.colorhunt.co" />
+<link href="icons.css" rel="stylesheet" type="text/css" /><link href="style.css" rel="stylesheet" type="text/css" />
+</head><body>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="scripts.js"></script><script src="js/moment-with-locales.js"></script>
+
+<div class="overlay tran"></div>
+
+<div class="header shadow">
+    <div class="half left"><span class="icon-menu tran"></span><a href="create.html" class="button tran create">Create</a></div>
+    <div class="half right">
+    </div>
+    <a title="Color Hunt" href="index.html"><img class="logo" src="img/logo.gif" /></a>
+</div>
+
+<div class="menu-block tran shadow">
+<a href="index.html">Home</a>
+<a class="tran" href="likes.html">Likes (<span class="likeslength"></span>)</a>
+</div>
+
+<div class="filter"><a class="new tran" href="index.html">New</a><a class="hot tran" href="hot.html">Hot</a><a class="popular tran" href="popular.html">Popular</a><a class="random tran" href="random.html">Random</a></div>
+
+<script type="text/javascript" src="js/spectrum.js"></script><link rel='stylesheet' href='spectrum.css' />
+
+<style>
+h2 { margin:0; margin-top:20px; }    
+.item { width:400px; cursor:pointer; margin:20px }
+    
+.c1 { background-color:#ddd }
+.c2 { background-color:#ccc }
+.c3 { background-color:#bbb }
+.c4 { background-color:#aaa }
+.hide { display:none }
+img { width:80px }
+.suggest-button { font-size:22px }
+</style>
+
+<center>
+
+<h2>Create a Color Palette!</h2>
+    
+<div class="item">
+    <div class="canvas">
+        <div class="place c4"></div>
+        <div class="place c3"></div>
+        <div class="place c2"></div>
+        <div class="place c1"></div>
+    </div>
+</div>
+
+
+<div class="code hide"></div>    
+
+<div>
+<img class="hide" src="img/loader.gif" />
+<a class="button hide suggest-button">Done</a>
+</div>
+
+
+
+<script type="text/javascript">
+
+$(".place").spectrum({
+move: function(color) { color = color.toHexString(); $(this).css('background-color', color); $('.suggest-button').removeClass('hide'); },
+change: function(color) { color = color.toHexString(); $(this).css('background-color', color); $('.suggest-button').removeClass('hide'); },
+showButtons: false,
+preferredFormat: "hex",
+showInput: true,
+});
+    
+$('.button').click(function() { $('.code').text(rgbtohex($('.item .c1').css('background-color'))+rgbtohex($('.item .c2').css('background-color'))+rgbtohex($('.item .c3').css('background-color'))+rgbtohex($('.item .c4').css('background-color')));
+    $(this).remove(); $('img').removeClass('hide');
+    var code = $('.code').text(); 
+    $.post("/act",  { act: 'create', code: code, status: 'unlisted' }, function(data, status){  window.location.href = "/c/" + data + "#m"; });
+});
+
+    
+if(window.location.hash) {
+code = window.location.hash.replace('#','');
+var c1 = code.substring(0,6); var c2 = code.substring(6,12); var c3 = code.substring(12,18); var c4 = code.substring(18,24);
+$('.item').find('.c1').css('background-color', '#'+c1);
+$('.item').find('.c2').css('background-color', '#'+c2);
+$('.item').find('.c3').css('background-color', '#'+c3);
+$('.item').find('.c4').css('background-color', '#'+c4);
+} 
+
+
+function rgbtohex(color) { var a = color.split("(")[1].split(")")[0]; a = a.split(","); var b = a.map(function(x){ x = parseInt(x).toString(16); return (x.length==1) ? "0"+x : x;    }); return b.join(""); }
+    
+</script>
+<script type="text/javascript">
+$('.icon-menu').click(function() { $('body').toggleClass('menu'); });
+$('.overlay').click(function() { $('body').removeClass('menu'); });
+$('body').addClass('create '); 
+$('.menu-block a:contains('+CapFirstChar('create')+')').addClass('current');
+
+$('.likeslength').html(localStorage.length);
+
+if ((window.innerWidth < 600))  { $('.header .fb-share-button').attr('data-layout','button'); }
+
+</script>
+
+</body></html>

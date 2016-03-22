@@ -1,0 +1,117 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="user-scalable=no, width=500" />
+<title>Color Hunt</title><link rel="icon" href="../img/favicon.gif" type="image/x-icon">
+<meta property="og:title" content="Color Hunt" />
+<meta name="twitter:title" content="Color Hunt" />
+<meta property="og:image" content="http://colorhunt.co/img/og.png" />
+<meta name="twitter:image" content="http://colorhunt.co/img/og.png" />
+<meta property="og:description" content="Curated collection of beautiful colors, updated daily." />
+<meta name="description" content="Curated collection of beautiful colors, updated daily.">
+<meta name="twitter:card" content="photo" />
+<meta name="twitter:site" content="@colorhunters" />
+<meta name="twitter:url" content="http://www.colorhunt.co" />
+<meta property="og:url" content="http://www.colorhunt.co" />
+<link href="../icons.css" rel="stylesheet" type="text/css" /><link href="../style.css" rel="stylesheet" type="text/css" />
+<link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/hchlgfaicmddilenlflajnmomalehbom">
+</head><body>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="../scripts.js"></script><script src="../js/moment-with-locales.js"></script>
+
+<div class="overlay tran"></div>
+
+<div class="header shadow">
+    <div class="half left"><span class="icon-menu tran"></span><a href="../create.html" class="button tran create">Create</a></div>
+    <div class="half right">
+        <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Beautiful%20Colors" data-count="horizontal" data-url="http://colorhunt.co" data-related="colorhunters" data-via="colorhunters"></a>
+        <div class="fb-share-button" data-href="http://colorhunt.co" data-layout="button_count"></div>
+        <div class="fb-like tran" data-href="https://facebook.com/colorhunters" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+    </div>
+    <a title="Color Hunt" href="../index.html"><img class="logo" src="../img/logo.gif" /></a>
+</div>
+
+<div class="menu-block tran shadow">
+<a href="../index.html">Home</a>
+<a class="tran" href="../likes.html">Likes (<span class="likeslength"></span>)</a>
+</div>
+
+<div class="filter"><a class="new tran" href="../index.html">New</a><a class="hot tran" href="../hot.html">Hot</a><a class="popular tran" href="../popular.html">Popular</a><a class="random tran" href="../random.html">Random</a></div>
+
+
+<div class="message shadow tran">
+<b>Thanks!</b><br>Your color scheme will be reviewed by our hunters. Follow us on <a target="_blank" href="http://facebook.com/colorhunters">Facebook</a> to stay updated!<a class="button tran">Okay</a>
+</div>
+
+<div class="feed">
+
+<div class="item shadow hide" data-id="" data-code="">
+    <div class="canvas">
+        <div class="place tran c4"><a href=""></a><span class="tran"></span></div>
+        <div class="place tran c3"><a href=""></a><span class="tran"></span></div>
+        <div class="place tran c2"><a href=""></a><span class="tran"></span></div>
+        <div class="place tran c1"><a href=""></a><span class="tran"></span></div>
+    </div>
+    <div class="actionbar">
+        <div class="left">
+            <a class="like button tran" onclick=""><span class="icon-heart tran"></span><span class="count"></span></a>
+            <a onclick="" target="_blank" class="share button tran" href="https://www.facebook.com/sharer/sharer.php?u=http://colorhunt.co/c/?ref=facebook">Share</a>
+        </div><div class="right">
+            <span class="date"></span>
+        </div>
+    </div>
+</div>
+    
+</div>
+
+<img class="loader" src="../img/loader.gif" />
+
+<div id="jscode"></div><script>
+
+$(function() {
+	<%= itemer %>	
+	$('.item[data-id=<%= color_id %>]').addClass('focus').find('.canvas a').removeAttr('href');});
+
+var sort = "new";
+$('.new').css('color','#364656');
+
+var i = 0; 
+
+taker(i, sort);
+oktoload="no";
+window.setTimeout(loading, 400);
+
+window.addEventListener('scroll', function scrolling() { 
+        if ( $(document).scrollTop() + $(window).height() >= $("body").height()) {
+        $('.loader').show();
+        if ( oktoload == "yes" ) { oktoload="no"; i++; setTimeout(goget, 200); }
+        window.setTimeout(loading, 400);
+    }
+});
+    
+function loading() { oktoload="yes"; } 
+
+function goget() {
+    taker(i, sort);
+}
+    
+if (window.location.hash.indexOf('m') == 1) {
+$('body').addClass('mine');
+    window.location.hash = '';
+    history.pushState('', document.title, window.location.pathname); 
+    $('.message .button').click(function() { $('body').removeClass('mine'); });
+}
+
+if(/chrom(e|ium)/.test(navigator.userAgent.toLowerCase())){ } else { $('.extension').hide(); }
+</script>
+<script type="text/javascript">
+$('.icon-menu').click(function() { $('body').toggleClass('menu'); });
+$('.overlay').click(function() { $('body').removeClass('menu'); });
+$('body').addClass('home new'); 
+$('.menu-block a:contains('+CapFirstChar('home')+')').addClass('current');
+
+$('.likeslength').html(localStorage.length);
+
+if ((window.innerWidth < 600))  { $('.header .fb-share-button').attr('data-layout','button'); }
+
+</script>
+
+</body></html>
+

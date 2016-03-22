@@ -1,0 +1,115 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="user-scalable=no, width=500" />
+<title>Color Hunt</title><link rel="icon" href="img/favicon.gif" type="image/x-icon">
+<meta property="og:title" content="Color Hunt" />
+<meta name="twitter:title" content="Color Hunt" />
+<meta property="og:image" content="http://colorhunt.co/img/og.png" />
+<meta name="twitter:image" content="http://colorhunt.co/img/og.png" />
+<meta property="og:description" content="Curated collection of beautiful colors, updated daily." />
+<meta name="description" content="Curated collection of beautiful colors, updated daily.">
+<meta name="twitter:card" content="photo" />
+<meta name="twitter:site" content="@colorhunters" />
+<meta name="twitter:url" content="http://www.colorhunt.co" />
+<meta property="og:url" content="http://www.colorhunt.co" />
+<link href="icons.css" rel="stylesheet" type="text/css" /><link href="style.css" rel="stylesheet" type="text/css" />
+<link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/hchlgfaicmddilenlflajnmomalehbom">
+</head><body>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="scripts.js"></script><script src="js/moment-with-locales.js"></script>
+
+<div class="overlay tran"></div>
+
+<div class="header shadow">
+    <div class="half left"><span class="icon-menu tran"></span><a href="create.html" class="button tran create">Create</a></div>
+    <div class="half right">
+        <a class="twitter-share-button" href="https://twitter.com/intent/tweet?text=Beautiful%20Colors" data-count="horizontal" data-url="http://colorhunt.co" data-related="colorhunters" data-via="colorhunters"></a>
+        <div class="fb-share-button" data-href="http://colorhunt.co" data-layout="button_count"></div>
+        <div class="fb-like tran" data-href="https://facebook.com/colorhunters" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+    </div>
+    <a title="Color Hunt" href="index.html"><img class="logo" src="img/logo.gif" /></a>
+</div>
+
+<div class="menu-block tran shadow">
+<a href="index.html">Home</a>
+<a class="tran" href="likes.html">Likes (<span class="likeslength"></span>)</a>
+</div>
+
+<div class="filter"><a class="new tran" href="index.html">New</a><a class="hot tran" href="hot.html">Hot</a><a class="popular tran" href="popular.html">Popular</a><a class="random tran" href="random.html">Random</a></div>
+
+<style>
+.liked-item { width:150px; margin:10px; border-radius:6px; padding:0 }
+.wrap { text-align:center }
+.nolikes-message { display:none }
+.nolikes .wrap { max-width:600px }
+.nolikes .nolikes-message { display:block }    
+.nolikes img {  max-width:100%; }
+.nolikes .counter { display:none }
+h2 { margin-top:0px; margin-bottom:20px }
+.button.explore { display:inline-block; margin-top:20px; }
+</style>
+
+<div class="wrap">
+
+    <div class="nolikes-message">
+        <img src="img/nolikes.png" /><br>
+        <h2>No Likes Yet</h2>
+        <p>Seems like you haven't like anything yet.<br>
+        Just hit the "Like" button on any palette and come back here to see your personal collection.  <br>
+        </p>
+        <a href="index.html" class="button tran explore">Explore Some Colors</a>
+    </div>
+    
+    <h2 class="counter"><span class="count"></span> Likes</h2>
+    
+<div class="placer"></div>
+    
+    
+<div class="item liked-item hide">
+    <div class="canvas">
+        <div class="place tran c4"><a href="likes.html"></a><span class="tran"></span></div>
+        <div class="place tran c3"><a href="likes.html"></a><span class="tran"></span></div>
+        <div class="place tran c2"><a href="likes.html"></a><span class="tran"></span></div>
+        <div class="place tran c1"><a href="likes.html"></a><span class="tran"></span></div>
+    </div>
+</div>
+    
+    
+    
+</div>
+
+
+
+<script>
+
+for(var j=0, len=localStorage.length; j<len; j++) {
+    var key = localStorage.key(j);
+    if ( localStorage.getItem(key) != null ) { imger(key, localStorage.getItem(key)); }
+}
+
+$(function() {
+if ( localStorage.length == "0") { $('body').addClass('nolikes'); } else { ga('send', 'event', 'likescount', localStorage.length); }
+$('.counter span').html(localStorage.length);
+});
+    
+function imger(code, id) {
+var newitem = $('.item.hide').clone().insertAfter('.item:last').removeClass('hide');
+var c1 = code.substring(0,6); var c2 = code.substring(6,12); var c3 = code.substring(12,18); var c4 = code.substring(18,24);
+newitem.find('.canvas a').attr('href', '/c/'+id);
+newitem.find('.c1, .c1 .color').css('background-color', '#'+c1); newitem.find('.c1 span').text('#'+c1);
+newitem.find('.c2, .c2 .color').css('background-color', '#'+c2); newitem.find('.c2 span').text('#'+c2);
+newitem.find('.c3, .c3 .color').css('background-color', '#'+c3); newitem.find('.c3 span').text('#'+c3);
+newitem.find('.c4, .c4 .color').css('background-color', '#'+c4); newitem.find('.c4 span').text('#'+c4);
+}
+    
+</script>
+<script type="text/javascript">
+$('.icon-menu').click(function() { $('body').toggleClass('menu'); });
+$('.overlay').click(function() { $('body').removeClass('menu'); });
+$('body').addClass('likes '); 
+$('.menu-block a:contains('+CapFirstChar('likes')+')').addClass('current');
+
+$('.likeslength').html(localStorage.length);
+
+if ((window.innerWidth < 600))  { $('.header .fb-share-button').attr('data-layout','button'); }
+</script>
+
+</body></html>

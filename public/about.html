@@ -1,0 +1,84 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="user-scalable=no, width=500" />
+<title>Color Hunt</title><link rel="icon" href="img/favicon.gif" type="image/x-icon">
+<meta property="og:title" content="Color Hunt" />
+<meta name="twitter:title" content="Color Hunt" />
+<meta property="og:image" content="http://colorhunt.co/img/og.png" />
+<meta name="twitter:image" content="http://colorhunt.co/img/og.png" />
+<meta property="og:description" content="Curated collection of beautiful colors, updated daily." />
+<meta name="description" content="Curated collection of beautiful colors, updated daily.">
+<meta name="twitter:card" content="photo" />
+<meta name="twitter:site" content="@colorhunters" />
+<meta name="twitter:url" content="http://www.colorhunt.co" />
+<meta property="og:url" content="http://www.colorhunt.co" />
+<link href="icons.css" rel="stylesheet" type="text/css" /><link href="style.css" rel="stylesheet" type="text/css" />
+</head><body>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="scripts.js"></script><script src="js/moment-with-locales.js"></script>
+
+
+<div class="overlay tran"></div>
+
+<div class="header shadow">
+    <div class="half left"><span class="icon-menu tran"></span><a href="create.html" class="button tran create">Create</a></div>
+    <div class="half right">
+    </div>
+    <a title="Color Hunt" href="index.html"><img class="logo" src="img/logo.gif" /></a>
+</div>
+
+<div class="menu-block tran shadow">
+<a href="index.html">Home</a>
+<a class="tran" href="likes.html">Likes (<span class="likeslength"></span>)</a>
+<a class="tran" href="blog.1.html">Blog</a>
+<a class="tran" href="about.html">About</a>
+</div>
+
+<div class="filter"><a class="new tran" href="index.html">New</a><a class="hot tran" href="hot.html">Hot</a><a class="popular tran" href="popular.html">Popular</a><a class="random tran" href="random.html">Random</a></div>
+
+<style>
+.wrap { max-width:900px; padding:20px; margin-top:-20px; text-align:center }
+p { max-width:500px; display:block; margin:0 auto; text-align:left; margin-top:20px; font-size:20px; line-height:180% }
+</style>
+
+<div class="wrap">
+    
+<h1>We Collect Beautiful Colors</h1>
+<p>
+Color Hunt is a place to discover and share beautiful color palettes. We pick and collect curated color combinations that has a magic. Our colors are all yours, you are welcome to use, share, and get inspiration, every day.
+</p>
+<p>
+We created Color Hunt to celebrate the beauty of colors in life, and each palette is defined with it's colors by digital HEX codes. 
+Our palettes are being used by web designers, art directors, fashion designers, interior designers, illustrators and many other people which are looking for some beautiful color combinations.
+</p>
+    
+<h2>We Accept Palette Suggestions</h1>
+<p>
+Color Hunt is a social platform which is updated daily. We love to enrich our collection with color palettes created by you.
+Our users <a href="create.html">create</a> beautiful palettes every day. Each creation is being reviewed by our hunters team, and the very best of those get featured in our home page.
+    Give it a try and <a href="create.html">contribute</a> to our collection.
+</p>
+
+<img style="width:200px; margin-bottom:-50px; margin-top:50px" src="img/logo-gif.gif" />
+    
+<h2>Join The Hunters</h1>
+<p>
+We always keep on posting new color inspirations on Color Hunt's <a target="_blank" href="http://facebook.com/colorhunters">Facebook page</a> and also on our <a target="_blank" href="http://twitter.com/colorhunters">Twitter</a> account.
+Follow us, <a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A//colorhunt.co">share</a> the collection with your friends, and drop us a line with your feedback! [<b>hello@colorhunt.co</b>] We would love to hear from you!
+</p>
+<p>
+Created and curated with ♥ by <a target="_blank" href="http://galshir.com">Gal Shir</a>
+</p>
+    
+</div>
+
+<script type="text/javascript">
+$('.icon-menu').click(function() { $('body').toggleClass('menu'); });
+$('.overlay').click(function() { $('body').removeClass('menu'); });
+$('body').addClass('about '); 
+$('.menu-block a:contains('+CapFirstChar('about')+')').addClass('current');
+
+$('.likeslength').html(localStorage.length);
+
+if ((window.innerWidth < 600))  { $('.header .fb-share-button').attr('data-layout','button'); }
+</script>
+
+</body></html>
